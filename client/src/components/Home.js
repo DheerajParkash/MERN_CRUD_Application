@@ -23,7 +23,7 @@ const Home = () => {
         const data = await res.json();
         console.log(data);
 
-        if (res.status === 404 || !data) {
+        if (res.status === 422 || !data) {
             console.log("Error ");
         } else {
             setUserData(data);
@@ -67,7 +67,7 @@ const Home = () => {
                                             <td>{user.work}</td>
                                             <td> {user.mobile}</td>
                                             <td className="d-flex justify-content-between">
-                                                <button className="btn btn-success"> <RemoveRedEyeIcon /> </button>
+                                               <NavLink to={`view/${user._id}`}><button className="btn btn-success"> <RemoveRedEyeIcon /> </button></NavLink>
                                                 <button className="btn btn-primary"><CreateIcon /></button>
                                                 <button className="btn btn-danger"> <DeleteOutlineIcon /></button>
                                             </td>

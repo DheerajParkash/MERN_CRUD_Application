@@ -6,7 +6,7 @@ const createUser=async (req,res)=>{
     const{name,email,age,mobile,work,add,desc}=req.body;
 
     if(!name || !email || !age || !mobile || !work || !add || !desc){
-        res.status(404).json(" Pls fill the data");
+        res.status(422).json(" Pls fill the data");
     }
 
     try{
@@ -26,7 +26,7 @@ const createUser=async (req,res)=>{
 
 
     }catch(error){
-        res.status(404).json(error)
+        res.status(422).json(error)
     }
 };
 
@@ -37,8 +37,23 @@ const getData=async (req,res)=>{
         res.status(201).json(userdata); 
         console.log(userdata);
     } catch (error) {
-        res.status(404).json(error)
+        res.status(422).json(error)
     }
 }
 
-module.exports={createUser, getData}
+const getIndividualUser=async(req,res)=>{
+    try{
+        const {id}=req.params;
+        console.log(req.params)
+
+        const  userIndividual= await users.findById({_id:id})
+        console.log(userIndividual);
+
+
+        res.status(201).json(userIndividual);
+    }catch(error){
+        res.status(422).json(error)
+    }
+}
+
+module.exports={createUser, getData, getIndividualUser}
