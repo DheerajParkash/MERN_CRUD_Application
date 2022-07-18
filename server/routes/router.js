@@ -13,7 +13,7 @@ router.post("/register", async (req,res)=>{
     const{name,email,age,mobile,work,add,desc}=req.body;
 
     if(!name || !email || !age || !mobile || !work || !add || !desc){
-        res.status(404).send(" Pls fill the data");
+        res.status(404).json(" Pls fill the data");
     }
 
     try{
@@ -21,19 +21,19 @@ router.post("/register", async (req,res)=>{
         console.log(preuser);
 
         if(preuser){
-            res.status(404).send(" this user is already registered")
+            res.status(404).json(" this user is already registered")
         }else{
     
             const adduser= new users({name,email,age,mobile,work,add,desc});
         
             await adduser.save()
             res.status(201).json(adduser);
-            console.log(adduser)
+            console.log(adduser)    
         }
 
 
     }catch(error){
-        res.status(404).send(error)
+        res.status(404).json(error)
     }
 })
 
