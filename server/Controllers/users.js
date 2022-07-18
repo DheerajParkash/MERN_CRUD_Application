@@ -1,7 +1,6 @@
 const users=require("../model/useSchema")
 
-
-
+// register user
 const createUser=async (req,res)=>{
 
     const{name,email,age,mobile,work,add,desc}=req.body;
@@ -31,5 +30,15 @@ const createUser=async (req,res)=>{
     }
 };
 
+// get user data
+const getData=async (req,res)=>{
+    try {
+        const userdata=await users.find();
+        res.status(201).json(userdata); 
+        console.log(userdata);
+    } catch (error) {
+        res.status(404).json(error)
+    }
+}
 
-module.exports={createUser}
+module.exports={createUser, getData}
