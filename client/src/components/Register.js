@@ -52,7 +52,7 @@ const Register=()=>{
         }else{
             alert(" data added")
             console.log("data addedd")
-            Navigate("/")
+            navigate("/")
         }
     }
 

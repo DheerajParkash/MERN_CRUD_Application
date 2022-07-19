@@ -3,7 +3,6 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { NavLink } from "react-router-dom";
-import { element } from "prop-types";
 
 const Home = () => {
 
@@ -27,7 +26,6 @@ const Home = () => {
             console.log("Error ");
         } else {
             setUserData(data);
-
         }
     }
 
@@ -35,7 +33,25 @@ const Home = () => {
         getdata()
     }, [])
 
+    const deleteUser=async (id)=>{
 
+        const res2=await fetch(`/deleteUser/${id}`,{
+            method:"DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        const deleteData= await res2.json();
+        console.log(deleteData); 
+
+        if(res2.status === 422 || !deleteData){
+            console.log("error")
+        }else{
+            console.log("data deleted")
+            getdata()
+        }
+    }
     return (
         <div className="mt-5">
             <div className="container">
@@ -69,7 +85,7 @@ const Home = () => {
                                             <td className="d-flex justify-content-between">
                                                <NavLink to={`view/${user._id}`}><button className="btn btn-success"> <RemoveRedEyeIcon /> </button></NavLink>
                                                <NavLink to={`edit/${user._id}`}> <button className="btn btn-primary"><CreateIcon /></button></NavLink>
-                                                <button className="btn btn-danger"> <DeleteOutlineIcon /></button>
+                                                <button className="btn btn-danger" onClick={()=> deleteUser(user._id)}> <DeleteOutlineIcon /></button>
                                             </td>
                                         </tr>
                                     </>
