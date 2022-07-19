@@ -14,7 +14,6 @@ const Details = () => {
     const [getUserData, setUserData] = useState([]);
     
     const {id}=useParams("");
-    
 
     const getdata = async () => {
 

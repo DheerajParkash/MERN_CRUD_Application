@@ -56,4 +56,20 @@ const getIndividualUser=async(req,res)=>{
     }
 }
 
-module.exports={createUser, getData, getIndividualUser}
+const updateUser=async (req,res)=>{
+    try {
+        const {id}=req.params;
+
+        const updateuser=await users.findByIdAndUpdate(id,req.body,{
+            new:true
+        })
+
+        console.log(updateuser);
+        res.status(201).json(updateuser);
+    } catch (error) {
+        res.status(422).json(error);
+    }
+}
+
+
+module.exports={createUser, getData, getIndividualUser, updateUser}
